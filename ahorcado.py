@@ -85,20 +85,25 @@ def random_word():
     idx = random.randint(0, len(WORDS) - 1)
     return WORDS[idx]
 
-def display_board(hidden_word, tries):
+def display_board(hidden_word, tries, user_letter_use):
     print(IMAGES[tries])
     print('')
     print(hidden_word)
+    print('LETTERS USE:')
+    print(user_letter_use)
+    print('ERROR:{}'.format(tries))    
     print('--- * --- * --- * --- * --- * --- ')
 
 def main():
     word =  random_word()
+    user_letter_use = []
     hidden_word = ['-'] * len(word)
     tries = 0
 
     while True:
-        display_board(hidden_word, tries)
+        display_board(hidden_word, tries, user_letter_use)
         current_letter = str(input('Escoge una letra: '))
+        user_letter_use.append(current_letter)
 
         letter_indexes = []
         for idx in range(len(word)):
@@ -108,8 +113,9 @@ def main():
         if len(letter_indexes) == 0:
             tries += 1
 
-            if tries == len(IMAGES) - 1 :                 
+            if tries == len(IMAGES) - 2 :                 
                 print('')
+                display_board(hidden_word, tries, user_letter_use)
                 print('YOU LOSE! The word was {}'.format(word))
                 break
 
