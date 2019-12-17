@@ -108,23 +108,19 @@ def main():
         if len(letter_indexes) == 0:
             tries += 1
 
-            if tries == len(IMAGES) - 1 : 
-                display_board(hidden_word, tries)
+            if tries == len(IMAGES) - 1 :                 
                 print('')
                 print('YOU LOSE! The word was {}'.format(word))
                 break
 
         else:
             for idx in letter_indexes:
-                hidden_word[idx] = current_letter                
-
-            letter_indexes = []
+                hidden_word[idx] = current_letter                            
 
         try:
             hidden_word.index('-')
         except ValueError:
-            print('')
-            print(display_board(hidden_word, tries))
+            print('')            
             print('YOU WIN!!!')
             break
             
